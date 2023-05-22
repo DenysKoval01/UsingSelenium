@@ -58,39 +58,44 @@ namespace UsingSelenium.Pages.PayGrades
             return _maximumSalaryText.Text.Replace(".00", ""); ;
         }
 
-        public void ClickSaveButton()
+        public Currencies ClickSaveButton()
         {
             _saveButton.Click();
+            return this;
         }
 
-        public void ClickCancelButton()
+        public Currencies ClickCancelButton()
         {
             _cancelButton.Click();
+            return this;
         }
 
-        public void ClickAddButton()
+        public Currencies ClickAddButton()
         {
             _addButton.Click();
+            return this;
         }
 
-        public void ClickCurrency()
+        public Currencies ClickCurrency()
         {
-            // _currencyField.Click();
             Actions action = new(_driver);
             action.Click(_currencyField).Perform();
             WebDriverWait wait = new(_driver, TimeSpan.FromSeconds(3));
             _ = wait.Until(ExpectedConditions.ElementToBeClickable(By.CssSelector(".oxd-form-row:nth-child(2) .oxd-grid-item:nth-child(1) .oxd-input")));
             action.Click(_currencyFieldFirst).Perform();
+            return this;
         }
 
-        public void SetMinimumSalary(string minSalary)
+        public Currencies SetMinimumSalary(string minSalary)
         {
             _minimumSalary.SendKeys(minSalary);
+            return this;
         }
 
-        public void SetMaximumSalary(string maxSalary)
+        public Currencies SetMaximumSalary(string maxSalary)
         {
             _maximumSalary.SendKeys(maxSalary);
+            return this;
         }
 
         public void WaitUntilPageIsLoaded()

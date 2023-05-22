@@ -21,29 +21,29 @@ namespace UsingSelenium.Regression
             string randomString = new(Enumerable.Repeat(chars, 6).Select(s => s[new Random().Next(s.Length)]).ToArray());
             Login login = Open<Login>("https://opensource-demo.orangehrmlive.com/");
             login.WaitUntilPageIsLoaded();
-            login.SetUserName("Admin").SetPassowrd("admin123");
-            login.ClickLogin();
+            login.SetUserName("Admin").SetPassowrd("admin123").ClickLogin();
 
 
-            SearchPage searchPage = new SearchPage(_driver);
+            SearchPage searchPage = new(_driver);
             searchPage.WaitUntilPageIsLoaded();
             searchPage.ClickOnAdmin();
-            AdminHeader adminHeader = new AdminHeader(_driver);
+            AdminHeader adminHeader = new(_driver);
+            adminHeader.WaitUntilPageIsLoaded();
             adminHeader.ClickJob();
-            IList<IWebElement> allElements = adminHeader.GetTableElements();
-            (from item in allElements where item.Text == "Pay Grades" select item).FirstOrDefault().Click();
+            (from item in adminHeader.GetTableElements() 
+                where item.Text == "Pay Grades" select item).FirstOrDefault().Click();
 
-            PayGrades payGrades = new PayGrades(_driver);
+            PayGrades payGrades = new(_driver);
             payGrades.WaitUntilPageIsLoaded();
             payGrades.ClickAddButton().SetPayGrade(randomString).ClickSaveButton();
 
-            Currencies currencies = new Currencies(_driver);
+            Currencies currencies = new(_driver);
             currencies.WaitUntilPageIsLoaded();
-            currencies.ClickAddButton();
-            currencies.ClickCurrency();
-            currencies.SetMinimumSalary(minimumSalary);
-            currencies.SetMaximumSalary(maximumSalary);
-            currencies.ClickSaveButton();
+            currencies.ClickAddButton()
+                .ClickCurrency()
+                .SetMinimumSalary(minimumSalary)
+                .SetMaximumSalary(maximumSalary)
+                .ClickSaveButton();
 
             Assert.That(minimumSalary, Is.EqualTo(currencies.GetMinimumSalaryText()));
             Assert.That(maximumSalary, Is.EqualTo(currencies.GetMaximumSalaryText()));
@@ -56,29 +56,29 @@ namespace UsingSelenium.Regression
             string randomString = new(Enumerable.Repeat(chars, 6).Select(s => s[new Random().Next(s.Length)]).ToArray());
             Login login = Open<Login>("https://opensource-demo.orangehrmlive.com/");
             login.WaitUntilPageIsLoaded();
-            login.SetUserName("Admin").SetPassowrd("admin123");
-            login.ClickLogin();
+            login.SetUserName("Admin").SetPassowrd("admin123").ClickLogin();
 
 
-            SearchPage searchPage = new SearchPage(_driver);
+            SearchPage searchPage = new(_driver);
             searchPage.WaitUntilPageIsLoaded();
             searchPage.ClickOnAdmin();
-            AdminHeader adminHeader = new AdminHeader(_driver);
+            AdminHeader adminHeader = new(_driver);
+            adminHeader.WaitUntilPageIsLoaded();
             adminHeader.ClickJob();
-            IList<IWebElement> allElements = adminHeader.GetTableElements();
-            (from item in allElements where item.Text == "Pay Grades" select item).FirstOrDefault().Click();
+            (from item in adminHeader.GetTableElements() 
+                where item.Text == "Pay Grades" select item).FirstOrDefault().Click();
 
-            PayGrades payGrades = new PayGrades(_driver);
+            PayGrades payGrades = new(_driver);
             payGrades.WaitUntilPageIsLoaded();
             payGrades.ClickAddButton().SetPayGrade(randomString).ClickSaveButton();
 
-            Currencies currencies = new Currencies(_driver);
+            Currencies currencies = new(_driver);
             currencies.WaitUntilPageIsLoaded();
-            currencies.ClickAddButton();
-            currencies.ClickCurrency();
-            currencies.SetMinimumSalary(minimumSalary);
-            currencies.SetMaximumSalary(maximumSalary);
-            currencies.ClickCancelButton();
+            currencies.ClickAddButton()
+                .ClickCurrency()
+                .SetMinimumSalary(minimumSalary)
+                .SetMaximumSalary(maximumSalary)
+                .ClickCancelButton();
 
             Assert.That(currencies.GetEmptyCurreniesText(), Is.EqualTo("No Records Found"));
 

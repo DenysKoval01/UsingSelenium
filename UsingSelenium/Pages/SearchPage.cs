@@ -1,11 +1,6 @@
 ﻿using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UsingSelenium.Interface;
 using UsingSelenium.Utils;
 using SeleniumExtras.PageObjects;
